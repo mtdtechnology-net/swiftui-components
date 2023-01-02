@@ -8,13 +8,13 @@
 
 import Foundation
 
-enum InterfaceError: Error, LocalizedError, Identifiable {
+public enum InterfaceError: Error, LocalizedError, Identifiable {
     case internalError
     case networkError
     case specialized(error: LocalizedError)
     case unknown(message: String)
     
-    var id: String {
+    public var id: String {
         switch self {
         case .internalError:
             return "invalid_error"
@@ -27,7 +27,7 @@ enum InterfaceError: Error, LocalizedError, Identifiable {
         }
     }
     
-    var errorDescription: String? {
+    public var errorDescription: String? {
         switch self {
         case .internalError:
             return L10n.internalErrorTitle
@@ -40,7 +40,7 @@ enum InterfaceError: Error, LocalizedError, Identifiable {
         }
     }
     
-    var recoverySuggestion: String? {
+    public var recoverySuggestion: String? {
         switch self {
         case .internalError:
             return L10n.internalErrorMessage
