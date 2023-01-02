@@ -19,4 +19,4 @@ jobs:
     - name: Build
       run: swift build -Xswiftc "-sdk" -Xswiftc "`xcrun --sdk iphonesimulator --show-sdk-path`" -Xswiftc "-target" -Xswiftc "x86_64-apple-ios14.0-simulator"
     - name: Run tests
-      run: xcodebuild test -scheme UIComponents -sdk iphonesimulator16.2 -destination "OS=16.2,name=iPhone 14 Pro"
+      run: xcodebuild test -scheme UIComponents -sdk iphonesimulator16.1 -destination "OS=16.1,name=iPhone 14 Pro"
