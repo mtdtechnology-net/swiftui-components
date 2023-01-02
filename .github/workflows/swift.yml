@@ -20,3 +20,14 @@ jobs:
       run: swift build -Xswiftc "-sdk" -Xswiftc "`xcrun --sdk iphonesimulator --show-sdk-path`" -Xswiftc "-target" -Xswiftc "x86_64-apple-ios14.0-simulator"
     - name: Run tests
       run: xcodebuild test -scheme UIComponents -sdk iphonesimulator16.1 -destination "OS=16.1,name=iPhone 14 Pro"
+    - name: Send custom JSON data to Slack workflow
+      id: slack
+      uses: slackapi/slack-github-action@v1.23.0
+      with:
+      # This data can be any valid JSON from a previous step in the GitHub Action
+        payload: |
+        {
+          "build_status": "${{ job.status }}"
+        }
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
