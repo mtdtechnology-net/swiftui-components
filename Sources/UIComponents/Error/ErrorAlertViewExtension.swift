@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension View {
-    func errorAlert(error: Binding<InterfaceError?>, dismissButton: Alert.Button? = nil) -> some View {
+    public func errorAlert(error: Binding<InterfaceError?>, dismissButton: Alert.Button? = nil) -> some View {
         alert(item: error) {
             Alert(
                 title: Text($0.errorDescription ?? L10n.genericErrorTitle),
