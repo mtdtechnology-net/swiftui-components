@@ -1,7 +1,7 @@
 import XCTest
 @testable import UIComponents
 
-final class UIComponentsTests: XCTestCase {
+final class LocalizationTests: XCTestCase {
     
     // MARK: - Localization Tests
     
