@@ -1,0 +1,12 @@
+/*
+  Localizable.strings
+  Created by Daniel Mandea on 02.01.2023.
+  String that is part of get started screeen
+*/
+
+"generic_error_title" = "Error";
+"generic_error_message" = "Oops Something went wrong.";
+"internal_error_title" = "An internal error occured!";
+"internal_error_message" = "Please try again later";
+"network_error_title" = "A networking error occured!";
+"network_error_message" = "Please check your connection and try again";
