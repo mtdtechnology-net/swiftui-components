@@ -28,8 +28,8 @@ jobs:
         payload: |
           {
             "build_status": "${{ job.status }}",
-            "app_name": "${{ steps.vars.outputs.repo_name }}",
             "work_done": "Build & Test",
+            "github_repository": "${{ steps.vars.outputs.repo_name }}",
             "github_commit_url": "${{ github.event.head_commit.url }}"
           }
       env:
