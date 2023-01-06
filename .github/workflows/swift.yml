@@ -28,7 +28,8 @@ jobs:
         payload: |
           {
             "build_status": "${{ job.status }}",
-            "app_name": "UIComponents"
+            "app_name": "UIComponents",
+            "work_done": "Build & Test"
           }
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
