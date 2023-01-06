@@ -28,8 +28,9 @@ jobs:
         payload: |
           {
             "build_status": "${{ job.status }}",
-            "app_name": "UIComponents",
-            "work_done": "Build & Test"
+            "app_name": "${{ steps.vars.outputs.repo_name }}",
+            "work_done": "Build & Test",
+            "github_commit_url": "${{ github.event.head_commit.url }}"
           }
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
