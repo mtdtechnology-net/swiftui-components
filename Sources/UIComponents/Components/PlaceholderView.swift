@@ -48,6 +48,10 @@ public struct PlaceholderView: View {
 
 struct NoDataView_Previews: PreviewProvider {
     static var previews: some View {
-        PlaceholderView(image: Image(systemName: "figure.barre"), message: "You have no data for this page!")
+        if #available(macOS 11.0, *) {
+            PlaceholderView(image: Image(systemName: "figure.barre"), message: "You have no data for this page!")
+        } else {
+            // Fallback on earlier versions
+        }
     }
 }
