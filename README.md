@@ -1,3 +1,6 @@
 # UIComponents
 
-A description of this package.
+## Description
+Represents a components container that provides the following: 
+- `Localization` using `swiftgen`
+- `Contento`

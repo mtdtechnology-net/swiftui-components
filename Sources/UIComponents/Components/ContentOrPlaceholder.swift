@@ -1,5 +1,5 @@
 //
-//  OptionalContentOrPlaceholder.swift
+//  ContentOrPlaceholder.swift
 //  UIComponents
 //
 //  Created by Daniel Mandea on 02.01.2023.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-public struct OptionalContentOrPlaceholder<Content: View, Placeholder: View, Item: Any>: View  {
+public struct ContentOrPlaceholder<Content: View, Placeholder: View, Item: Any>: View  {
     
     // MARK: - @State
     
-    @Binding var items: [Item]?
+    var items: [Item]
     
     // MARK: - @ViewBuilder
     
@@ -20,10 +20,10 @@ public struct OptionalContentOrPlaceholder<Content: View, Placeholder: View, Ite
     
     // MARK: - Init
     
-    public init(items: Binding<[Item]?>,
+    public init(items: [Item],
                 @ViewBuilder content: () -> Content,
                 @ViewBuilder placeholder: () -> Placeholder) {
-        self._items = items
+        self.items = items
         self.content = content()
         self.placeholder = placeholder()
     }
@@ -31,7 +31,7 @@ public struct OptionalContentOrPlaceholder<Content: View, Placeholder: View, Ite
     // MARK: - Body
     
     public var body: some View {
-        if items?.isEmpty ?? false {
+        if items.isEmpty {
             placeholder
         } else {
             content
@@ -41,9 +41,9 @@ public struct OptionalContentOrPlaceholder<Content: View, Placeholder: View, Ite
 
 // MARK: - PreviewProvider
 
-struct OptionalContentOrPlaceholder_Previews: PreviewProvider {
+struct ContentOrPlaceholder_Previews: PreviewProvider {
     static var previews: some View {
-        OptionalContentOrPlaceholder(items: .constant([true])) {
+        ContentOrPlaceholder(items: ["One", "Two"]) {
             Text("Content")
         } placeholder: {
             Text("Placeholder")
