@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DynamicContent<Content: View, Item: Any>: View  {
+public struct DynamicContent<Content: View, Item: Any>: View  {
     
     
     // MARK: - @State
@@ -22,7 +22,7 @@ struct DynamicContent<Content: View, Item: Any>: View  {
     
     // MARK: - Init
     
-    init(items: [Item],
+    public init(items: [Item],
          _ placeholderTitle: String,
          _ placeholderImage: Image,
          @ViewBuilder content: () -> Content) {
@@ -34,7 +34,7 @@ struct DynamicContent<Content: View, Item: Any>: View  {
     
     // MARK: - Body
     
-    var body: some View {
+    public var body: some View {
         ContentOrPlaceholder(items: items) {
             content
         } placeholder: {
