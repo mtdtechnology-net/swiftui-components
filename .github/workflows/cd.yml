@@ -1,0 +1,51 @@
+# This workflow will build a Swift project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-swift
+
+name: CD - Release new version
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: self-hosted
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build
+      run: swift build -v
+    - name: Run tests
+      run: swift test -v
+    
+    - name: Generate release tag
+      id: generate_release_tag
+      uses: amitsingh-007/next-release-tag@v4.0.0
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        tag_prefix: ''
+        tag_template: 'yy.mm.i'
+
+    - name: Create Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.generate_release_tag.outputs.next_release_tag }}
+        release_name: Release ${{ steps.generate_release_tag.outputs.next_release_tag }}
+
+    - name: Slack Notification
+      id: slack
+      uses: slackapi/slack-github-action@v1.23.0
+      with:
+        # This data can be any valid JSON from a previous step in the GitHub Action
+        payload: |
+          {
+            "build_status": "${{ job.status }}",
+            "work_done": "Async URL Session - CD Pipeline",
+            "github_repository": "${{ steps.vars.outputs.repo_name }}",
+            "github_commit_url": "${{ github.event.head_commit.url }}"
+          }
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
