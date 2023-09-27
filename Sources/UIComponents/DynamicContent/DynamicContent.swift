@@ -1,5 +1,5 @@
 //
-//  ContentOrPlaceholder.swift
+//  DynamicContent.swift
 //  UIComponents
 //
 //  Created by Daniel Mandea on 02.01.2023.
@@ -7,20 +7,20 @@
 
 import SwiftUI
 
-public struct ContentOrPlaceholder<Content: View, Placeholder: View, Item: Any>: View  {
+public struct DynamicContent<Content: View, Placeholder: View, Item: Any>: View  {
     
     // MARK: - @State
     
-    var items: [Item]
+    public var items: [Item]
     
     // MARK: - @ViewBuilder
     
-    @ViewBuilder var content: Content
-    @ViewBuilder var placeholder: Placeholder
+    @ViewBuilder public var content: Content
+    @ViewBuilder public var placeholder: Placeholder
     
     // MARK: - Init
     
-    public init(items: [Item],
+    @inlinable public init(items: [Item],
                 @ViewBuilder content: () -> Content,
                 @ViewBuilder placeholder: () -> Placeholder) {
         self.items = items
@@ -43,7 +43,7 @@ public struct ContentOrPlaceholder<Content: View, Placeholder: View, Item: Any>:
 
 struct ContentOrPlaceholder_Previews: PreviewProvider {
     static var previews: some View {
-        ContentOrPlaceholder(items: ["One", "Two"]) {
+        DynamicContent(items: ["One", "Two"]) {
             Text("Content")
         } placeholder: {
             Text("Placeholder")

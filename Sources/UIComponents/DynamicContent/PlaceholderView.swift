@@ -11,14 +11,14 @@ public struct PlaceholderView: View {
     
     // MARK: - Internal Variables
     
-    public var image: Image
-    public var message: String
+    @ViewBuilder public var image: Image
+    @ViewBuilder public var message: Text
     
     // MARK: - Init
     
-    public init(image: Image, message: String) {
-        self.image = image
-        self.message = message
+    public init(@ViewBuilder image: () -> Image, message: () -> Text) {
+        self.image = image()
+        self.message = message()
     }
     
     // MARK: - Body
@@ -29,13 +29,7 @@ public struct PlaceholderView: View {
             ZStack {
                 VStack {
                     image
-                        .resizable()
-                        .scaledToFit()
-                        .padding(40)
-                        .foregroundColor(.accentColor)
-                    Text(message)
-                        .font(.body)
-                        .foregroundColor(.accentColor)
+                    message
                 }
                 .padding()
             }
@@ -49,7 +43,11 @@ public struct PlaceholderView: View {
 struct NoDataView_Previews: PreviewProvider {
     static var previews: some View {
         if #available(macOS 11.0, *) {
-            PlaceholderView(image: Image(systemName: "figure.barre"), message: "You have no data for this page!")
+            PlaceholderView {
+                Image(systemName: "figure.barre")
+            } message: {
+                Text("You have no data for this page!")
+            }
         } else {
             // Fallback on earlier versions
         }
