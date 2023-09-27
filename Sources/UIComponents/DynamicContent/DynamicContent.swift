@@ -46,7 +46,21 @@ struct ContentOrPlaceholder_Previews: PreviewProvider {
         DynamicContent(items: ["One", "Two"]) {
             Text("Content")
         } placeholder: {
-            Text("Placeholder")
+            PlaceholderView {
+                Image(systemName: "figure.barre")
+            } message: {
+                Text("You have no data for this page!")
+            }
+        }
+        
+        DynamicContent(items: []) {
+            Text("Content")
+        } placeholder: {
+            PlaceholderView {
+                Image(systemName: "figure.barre")
+            } message: {
+                Text("You have no data for this page!")
+            }
         }
     }
 }
