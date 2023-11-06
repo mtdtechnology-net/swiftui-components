@@ -1,18 +1,20 @@
 //
-//  SwiftUIView.swift
-//  
+//  ResponsiveButtonStyle.swift
+//
 //
 //  Created by Marcel on 06.11.2023.
 //
 
 import SwiftUI
 
-struct SwiftUIView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+public struct ResponsiveButtonStyle: PrimitiveButtonStyle {
+    public var isInteractive: Bool
 
-#Preview {
-    SwiftUIView()
+    public func makeBody(configuration: Configuration) -> some View {
+        if !isInteractive {
+            configuration.label
+        } else {
+            PlainButtonStyle().makeBody(configuration: configuration)
+        }
+    }
 }

@@ -8,34 +8,43 @@
 import SwiftUI
 
 public struct PrimaryButton: View {
-    let label: String
-    let enabled: Bool
-    var icon: String?
-    var iconAlignment: IconAlignment?
-    var isLoading: Bool
-    let action: (() -> Void)
+    public let label: String
+    public let enabled: Bool
+    public let foregroundColor: Color
+    public var icon: String?
+    public var iconAlignment: IconAlignment?
+    public var isLoading: Bool
+    public let height: CGFloat
+    public let shadowRadius: CGFloat
+    public let action: (() -> Void)
 
-    init(label: String,
-         enabled: Bool = true,
-         icon: String? = nil,
-         iconAlignment: IconAlignment? = .left,
-         isLoading: Bool = false,
-         action: @escaping () -> Void) {
+    public init(label: String,
+                enabled: Bool = true,
+                icon: String? = nil,
+                foregroundColor: Color,
+                iconAlignment: IconAlignment? = .left,
+                isLoading: Bool = false,
+                height: CGFloat = 44,
+                shadowRadius: CGFloat = 5,
+                action: @escaping () -> Void) {
         self.label = label
         self.enabled = enabled
         self.icon = icon
+        self.foregroundColor = foregroundColor
         self.iconAlignment = iconAlignment
         self.isLoading = isLoading
+        self.height = height
+        self.shadowRadius = shadowRadius
         self.action = action
     }
 
     public var body: some View {
         Button(action: action, label: {
             RoundedRectangle(cornerRadius: 8)
-                .foregroundStyle(.accent)
+                .foregroundColor(foregroundColor)
                 .frame(maxWidth: .infinity)
-                .frame(height: 50)
-                .shadow(radius: 5)
+                .frame(height: height)
+                .shadow(radius: shadowRadius)
                 .overlay(
                     Group {
                         if isLoading {
@@ -43,7 +52,7 @@ public struct PrimaryButton: View {
                                 .progressViewStyle(CircularProgressViewStyle(tint: .white))
                         } else {
                             HStack(alignment: .center) {
-                                Text(label.localized)
+                                Text(label)
                                 if let icon = icon {
                                     Image(systemName: icon)
                                 }
@@ -61,24 +70,12 @@ public struct PrimaryButton: View {
 }
 
 extension PrimaryButton {
-    enum IconAlignment {
+    public enum IconAlignment {
         case left, right
     }
 }
 
-public struct ResponsiveButtonStyle: PrimitiveButtonStyle {
-    var isInteractive: Bool
-
-    public func makeBody(configuration: Configuration) -> some View {
-        if !isInteractive {
-            configuration.label
-        } else {
-            PlainButtonStyle().makeBody(configuration: configuration)
-        }
-    }
-}
-
 #Preview {
-    PrimaryButton(label: "Login", icon: "arrow.right", action: {})
+    PrimaryButton(label: "Login", icon: "arrow.right", foregroundColor: .accentColor, action: {})
 }
 
