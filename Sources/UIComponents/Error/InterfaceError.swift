@@ -35,8 +35,8 @@ public enum InterfaceError: Error, LocalizedError, Identifiable {
             return L10n.networkErrorTitle
         case .specialized(error: let error):
             return error.errorDescription
-        case .unknown(message: let message):
-            return message
+        case .unknown(message: _):
+            return L10n.internalErrorTitle
         }
     }
     

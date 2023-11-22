@@ -9,7 +9,7 @@
 import Foundation
 
 final class TranslationService {
-    static let bundle: Bundle = {  Bundle.module }()
+    static let bundle: Bundle = { Bundle.module }()
     
     static func lookupTranslation(forKey key: String, inTable table: String, value: String) -> String {
         bundle.localizedString(forKey: key, value: value, table: "Localizable")

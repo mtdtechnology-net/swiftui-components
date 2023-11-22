@@ -13,8 +13,8 @@ public enum L10n {
   /// Oops Something went wrong.
   public static var genericErrorMessage: String { return L10n.tr("Localizable", "generic_error_message", fallback: "Oops Something went wrong.") }
   /// Localizable.strings
-  ///   Created by Daniel Mandea on 02.01.2023.
-  ///   String that is part of get started screeen
+  /// Created by Daniel Mandea on 02.01.2023.
+  /// String that is part of get started screeen
   public static var genericErrorTitle: String { return L10n.tr("Localizable", "generic_error_title", fallback: "Error") }
   /// Please try again later
   public static var internalErrorMessage: String { return L10n.tr("Localizable", "internal_error_message", fallback: "Please try again later") }
