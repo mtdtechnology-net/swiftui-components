@@ -59,9 +59,6 @@ public struct InputView<Content: View>: View {
 #Preview {
     InputView(title: "Email", color: .gray, systemImage: "envelope", inputBackground: .white, inputOverlay: .gray) {
         TextField("Enter your email here", text: .constant(""))
-            .textContentType(.emailAddress)
-            .keyboardType(.emailAddress)
-            .foregroundColor(.gray)
     }
     .padding()
 }
