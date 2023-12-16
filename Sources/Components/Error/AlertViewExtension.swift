@@ -1,6 +1,6 @@
 //
-//  ErrorAlertViewExtension.swift
-//  UIComponents
+//  AlertViewExtension.swift
+//  Components
 //
 //  Created by Daniel Mandea on 02.01.2023.
 //

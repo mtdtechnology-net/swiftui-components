@@ -1,6 +1,6 @@
 //
 //  InterfaceError.swift
-//  UIComponents
+//  Components
 //
 //  Created by Daniel Mandea on 24.08.2022.
 //  Copyright © 2023 MTD Technology(publ). All rights reserved.

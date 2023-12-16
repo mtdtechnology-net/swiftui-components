@@ -1,5 +1,5 @@
 import XCTest
-@testable import UIComponents
+@testable import Components
 
 final class LocalizationTests: XCTestCase {
     

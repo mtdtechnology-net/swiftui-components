@@ -1,6 +1,6 @@
 //
 //  PlaceholderView.swift
-//  PlaceholderView
+//  Components
 //
 //  Created by Daniel Mandea on 27.08.2021.
 //

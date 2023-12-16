@@ -1,6 +1,6 @@
 //
 //  DynamicContent.swift
-//  UIComponents
+//  Components
 //
 //  Created by Daniel Mandea on 02.01.2023.
 //
