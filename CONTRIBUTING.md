@@ -1,4 +1,4 @@
-# Contributing to YourPackageName
+# Contributing to Components
 
 Thank you for considering contributing to Components! 🎉
 
