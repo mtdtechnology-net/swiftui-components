@@ -9,25 +9,58 @@ import SwiftUI
 
 public struct GenericTextField: View {
 
-    // MARK: - Property wrapper
+    // MARK: - Public Property wrapper
 
-    @State private var isSelected = false
-    @Binding public var isSecureTextEntry: Bool
+    @State private var isSecureTextEntry = true
     @Binding public var hasError: Bool
     @Binding public var text: String
+    @FocusState public var isFocused: Bool
 
     // MARK: - Public
 
+    /// The title of the text field.
     public let title: String
+
+    /// An optional error description to display when there is an error.
     public var errorDescription: String?
+
+    /// The placeholder text for the text field.
     public let placeholder: String
+
+    /// The name of the icon associated with the text field.
     public let icon: String
+
+    /// A boolean value indicating whether the text field should be secure (e.g., password field).
     public let isSecure: Bool
+
+    /// The color of the border for the text field.
     public let borderColor: Color
 
-    // MARK: - Init
+    // MARK: - Initialization
 
-    public init(isSecureTextEntry: Binding<Bool>, hasError: Binding<Bool>, text: Binding<String>, title: String, errorDescription: String? = nil, placeholder: String, icon: String, isSecure: Bool, borderColor: Color) {
+    /// Initializes a custom-styled text field view modifier.
+    ///
+    /// - Parameters:
+    ///   - isSecureTextEntry: A binding to a boolean value indicating whether the text field is in secure entry mode.
+    ///   - hasError: A binding to a boolean value indicating whether the text field has an error.
+    ///   - text: A binding to the text value of the text field.
+    ///   - title: The title of the text field.
+    ///   - errorDescription: An optional error description to display when there is an error.
+    ///   - placeholder: The placeholder text for the text field.
+    ///   - icon: The name of the icon associated with the text field.
+    ///   - isSecure: A boolean value indicating whether the text field should be secure (e.g., password field).
+    ///   - borderColor: The color of the border for the text field.
+    public init(
+        isSecureTextEntry: Binding<Bool>,
+        hasError: Binding<Bool>,
+        text: Binding<String>,
+        title: String,
+        errorDescription: String? = nil,
+        placeholder: String,
+        icon: String,
+        isSecure: Bool,
+        borderColor: Color
+    ) {
         self._isSecureTextEntry = isSecureTextEntry
         self._hasError = hasError
         self._text = text
@@ -49,27 +82,32 @@ public struct GenericTextField: View {
             VStack {
                 HStack {
                     Image(systemName: icon)
-                        .foregroundColor(hasError ? .red : .primary)
+                        .foregroundColor(hasError ? .red : .gray)
 
-                    if isSecureTextEntry {
+                    if isSecureTextEntry && isSecure {
                         SecureField(placeholder, text: $text)
+                            .focused($isFocused)
                     } else {
                         TextField(placeholder, text: $text)
+                            .focused($isFocused)
                     }
 
                     if isSecure {
                         Button(action: {
+                            // Toggle the visibility of the secure text
                             isSecureTextEntry.toggle()
                         }) {
                             Image(systemName: isSecureTextEntry ? "eye.slash.fill" : "eye.fill")
-                                .foregroundColor(.primary)
+                                .foregroundColor(.gray)
                         }
                     }
                 }
-
-                // Your other content goes here
             }
-            .modifier(ModifiedOnboardingTextField(isSelected: $isSelected, hasError: $hasError, foregroundColor: borderColor))
+            .modifier(BorderModifierTextField(
+                isFocused: $isFocused,
+                hasError: $hasError,
+                foregroundColor: borderColor
+            ))
 
             /// Error message
             if let errorDescription {
@@ -78,25 +116,5 @@ public struct GenericTextField: View {
                     .foregroundColor(.red)
             }
         }
-    }
-}
-
-struct ModifiedOnboardingTextField: ViewModifier {
-
-    @Binding var isSelected: Bool
-    @Binding var hasError: Bool
-    let foregroundColor: Color
-
-    func body(content: Content) -> some View {
-        content
-            .font(.body)
-            .padding([.top, .bottom, .trailing], 15)
-            .padding([.leading, .trailing], 10)
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .strokeBorder(hasError ? Color.red : (isSelected ? .blue : .gray),
-                                  lineWidth: hasError ? 2 : (isSelected ? 2 : 1))
-            )
-            .onTapGesture { self.isSelected = true }
     }
 }
