@@ -41,7 +41,6 @@ public struct GenericTextField: View {
     /// Initializes a custom-styled text field view modifier.
     ///
     /// - Parameters:
-    ///   - isSecureTextEntry: A binding to a boolean value indicating whether the text field is in secure entry mode.
     ///   - hasError: A binding to a boolean value indicating whether the text field has an error.
     ///   - text: A binding to the text value of the text field.
     ///   - title: The title of the text field.
@@ -51,7 +50,6 @@ public struct GenericTextField: View {
     ///   - isSecure: A boolean value indicating whether the text field should be secure (e.g., password field).
     ///   - borderColor: The color of the border for the text field.
     public init(
-        isSecureTextEntry: Binding<Bool>,
         hasError: Binding<Bool>,
         text: Binding<String>,
         title: String,
@@ -61,7 +59,6 @@ public struct GenericTextField: View {
         isSecure: Bool,
         borderColor: Color
     ) {
-        self._isSecureTextEntry = isSecureTextEntry
         self._hasError = hasError
         self._text = text
         self.title = title
