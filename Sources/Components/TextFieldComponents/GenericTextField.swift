@@ -115,3 +115,7 @@ public struct GenericTextField: View {
         }
     }
 }
+
+#Preview {
+    GenericTextField(hasError: .constant(false), text: .constant(""), title: "Title", placeholder: "Placeholder", icon: "plane", isSecure: false, borderColor: .blue)
+}
