@@ -11,6 +11,7 @@ public struct PrimaryButton: View {
     public let label: String
     public let enabled: Bool
     public let foregroundColor: Color
+    public let textColor: Color
     public var icon: String?
     public var iconAlignment: IconAlignment?
     public var isLoading: Bool
@@ -22,6 +23,7 @@ public struct PrimaryButton: View {
                 enabled: Bool = true,
                 icon: String? = nil,
                 foregroundColor: Color,
+                textColor: Color,
                 iconAlignment: IconAlignment? = .left,
                 isLoading: Bool = false,
                 height: CGFloat = 44,
@@ -31,6 +33,7 @@ public struct PrimaryButton: View {
         self.enabled = enabled
         self.icon = icon
         self.foregroundColor = foregroundColor
+        self.textColor = textColor
         self.iconAlignment = iconAlignment
         self.isLoading = isLoading
         self.height = height
@@ -41,7 +44,7 @@ public struct PrimaryButton: View {
     public var body: some View {
         Button(action: action, label: {
             RoundedRectangle(cornerRadius: 8)
-                .foregroundColor(foregroundColor)
+                .foregroundStyle(foregroundColor)
                 .frame(maxWidth: .infinity)
                 .frame(height: height)
                 .shadow(radius: shadowRadius)
@@ -58,7 +61,7 @@ public struct PrimaryButton: View {
                                 }
                             }
                             .font(.body)
-                            .foregroundColor(.white)
+                            .foregroundStyle(textColor)
                             .environment(\.layoutDirection, iconAlignment == .left ? .leftToRight : .rightToLeft)
                         }
                     }
@@ -76,6 +79,6 @@ extension PrimaryButton {
 }
 
 #Preview {
-    PrimaryButton(label: "Login", icon: "arrow.right", foregroundColor: .accentColor, action: {})
+    PrimaryButton(label: "Login", icon: "arrow.right", foregroundColor: .accentColor, textColor: .black, action: {})
 }
 
