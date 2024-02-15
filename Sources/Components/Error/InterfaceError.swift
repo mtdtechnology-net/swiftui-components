@@ -13,17 +13,15 @@ public enum InterfaceError: Error, LocalizedError, Identifiable {
     case networkError
     case specialized(error: LocalizedError)
     case unknown(message: String)
-    
+    case custom(title: String, message: String)
+
     public var id: String {
         switch self {
-        case .internalError:
-            return "invalid_error"
-        case .networkError:
-            return "network_error"
-        case .specialized:
-            return "specialized_error"
-        case .unknown:
-            return "unknown_error"
+        case .internalError: return "invalid_error"
+        case .networkError: return "network_error"
+        case .specialized: return "specialized_error"
+        case .unknown: return "unknown_error"
+        case .custom: return "custom_error"
         }
     }
     
@@ -37,6 +35,8 @@ public enum InterfaceError: Error, LocalizedError, Identifiable {
             return error.errorDescription
         case .unknown(message: _):
             return L10n.internalErrorTitle
+        case .custom(title: let title, message: _):
+            return title
         }
     }
     
@@ -49,6 +49,8 @@ public enum InterfaceError: Error, LocalizedError, Identifiable {
         case .specialized(error: let error):
             return error.recoverySuggestion
         case .unknown(message: let message):
+            return message
+        case .custom(title: _, message: let message):
             return message
         }
     }

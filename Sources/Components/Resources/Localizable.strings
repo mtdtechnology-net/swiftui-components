@@ -5,7 +5,7 @@
 */
 
 "generic_error_title" = "Error";
-"generic_error_message" = "Oops Something went wrong.";
+"generic_error_message" = "Oops something went wrong.";
 "internal_error_title" = "An internal error occured!";
 "internal_error_message" = "Please try again later";
 "network_error_title" = "A networking error occured!";
