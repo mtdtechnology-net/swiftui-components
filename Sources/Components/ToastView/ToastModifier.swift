@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import UIKit
+import Foundation
 
 struct ToastModifier: ViewModifier {
 
