@@ -13,6 +13,9 @@ UIComponents is a Swift Package Manager (SwiftPM) package that provides a collec
 ### Views
 - [ ] `ImageContentView`
 - [ ] `InputView`
+- [ ] `Toast`
+- [ ] `GenericTextField`
+- [ ] `PrimaryButton`
 
 ### ButtonStyle
 - [ ] `ActionButtonStyle`
@@ -22,6 +25,7 @@ UIComponents is a Swift Package Manager (SwiftPM) package that provides a collec
 ### ViewModifiers
 - [ ] `FullButtonStyle`
 - [ ] `CardModifier`
+- [ ] `ToastView`
 
 ### Error 
 - [ ] `Alert`
