@@ -10,6 +10,6 @@ final class LocalizationTests: XCTestCase {
     }
     
     func testGenericErrorMessageLocalization() {
-        XCTAssertEqual(L10n.genericErrorMessage, "Oops Something went wrong.")
+        XCTAssertEqual(L10n.genericErrorMessage, "Oops something went wrong.")
     }
 }
