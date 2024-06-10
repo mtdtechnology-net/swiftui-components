@@ -36,6 +36,9 @@ public struct GenericTextField: View {
     /// The color of the border for the text field.
     public let borderColor: Color
 
+    /// The color of the icon textfield
+    public let iconColor: Color
+
     // MARK: - Initialization
 
     /// Initializes a custom-styled text field view modifier.
@@ -57,7 +60,8 @@ public struct GenericTextField: View {
         placeholder: String,
         icon: String,
         isSecure: Bool,
-        borderColor: Color
+        borderColor: Color,
+        iconColor: Color
     ) {
         self._hasError = hasError
         self._text = text
@@ -67,6 +71,7 @@ public struct GenericTextField: View {
         self.icon = icon
         self.isSecure = isSecure
         self.borderColor = borderColor
+        self.iconColor = iconColor
     }
 
     // MARK: - Body
@@ -79,7 +84,7 @@ public struct GenericTextField: View {
             VStack {
                 HStack {
                     Image(systemName: icon)
-                        .foregroundColor(hasError ? .red : .gray)
+                        .foregroundStyle(hasError ? .red : iconColor)
 
                     if isSecureTextEntry && isSecure {
                         SecureField(placeholder, text: $text)
@@ -91,11 +96,11 @@ public struct GenericTextField: View {
 
                     if isSecure {
                         Button(action: {
-                            // Toggle the visibility of the secure text
+                            /// Toggle the visibility of the secure text
                             isSecureTextEntry.toggle()
                         }) {
                             Image(systemName: isSecureTextEntry ? "eye.slash.fill" : "eye.fill")
-                                .foregroundColor(.gray)
+                                .foregroundStyle(iconColor)
                         }
                     }
                 }
@@ -110,12 +115,12 @@ public struct GenericTextField: View {
             if let errorDescription {
                 Text(errorDescription)
                     .font(.callout)
-                    .foregroundColor(.red)
+                    .foregroundStyle(.red)
             }
         }
     }
 }
 
 #Preview {
-    GenericTextField(hasError: .constant(false), text: .constant(""), title: "Title", placeholder: "Placeholder", icon: "plane", isSecure: false, borderColor: .blue)
+    GenericTextField(hasError: .constant(false), text: .constant(""), title: "Title", placeholder: "Placeholder", icon: "plane", isSecure: false, borderColor: .blue, iconColor: .blue)
 }
