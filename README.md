@@ -77,6 +77,51 @@ struct ContentView: View {
 }
 ```
 
+### Usage `LargeTitleView`
+
+```swift
+
+import SwiftUI
+import Components
+
+struct ContentView: View {
+    var body: some View {
+        NavigationView {
+            List {
+                ForEach(1..<50) { index in
+                    Text("Sample Row \(String(index))")
+                }
+            }
+            .navigationTitle("Navigation")
+            .navigationLargeTitleItems(trailing: ProfileIcon())
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+
+struct ProfileIcon: View {
+    var body: some View{
+        Button(action: {
+            print("Profile button was tapped")
+        }) {
+            Image(systemName: "person.circle.fill")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .foregroundColor(.red)
+                .frame(width: 36, height: 36)
+        }
+        .padding([.trailing], 20)
+        .padding([.top], 5)
+    }
+}
+
+```
+
 ## Documentation
 
 For detailed documentation and examples, refer to the [Documentation folder](Documentation/) in this repository.
