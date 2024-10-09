@@ -7,12 +7,15 @@
 
 import SwiftUI
 
+#if os(iOS)
+@available(iOS 15.0, *)
 public extension View {
     func navigationLargeTitleItems<L>(trailing: L) -> some View where L : View {
         overlay(NavigationBarLargeTitleItems(trailing: trailing).frame(width: 0, height: 0))
     }
 }
 
+@available(iOS 15.0, *)
 fileprivate struct NavigationBarLargeTitleItems<L : View>: UIViewControllerRepresentable {
     typealias UIViewControllerType = Wrapper
     
@@ -86,3 +89,4 @@ fileprivate struct NavigationBarLargeTitleItems<L : View>: UIViewControllerRepre
         }
     }
 }
+#endif
