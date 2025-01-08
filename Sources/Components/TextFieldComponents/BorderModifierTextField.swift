@@ -17,6 +17,9 @@ public struct BorderModifierTextField: ViewModifier {
     // MARK: - Properties
 
     public let foregroundColor: Color
+    public var cornerRadius: CGFloat
+    public var paddingHorizontal: CGFloat
+    public var paddingVertical: CGFloat
 
     // MARK: - Initializer
 
@@ -25,10 +28,20 @@ public struct BorderModifierTextField: ViewModifier {
     ///   - isFocused: A binding to a boolean value indicating whether the text field is currently focused.
     ///   - hasError: A binding to a boolean value indicating whether the text field has an error.
     ///   - foregroundColor: Color for the border
-    public init(isFocused: FocusState<Bool>.Binding, hasError: Binding<Bool>, foregroundColor: Color) {
+    public init(
+        isFocused: FocusState<Bool>.Binding,
+        hasError: Binding<Bool>,
+        foregroundColor: Color,
+        cornerRadius: CGFloat = 10,
+        paddingHorizontal: CGFloat = 10,
+        paddingVertical: CGFloat = 15
+    ) {
         self._isFocused = isFocused
         self._hasError = hasError
         self.foregroundColor = foregroundColor
+        self.cornerRadius = cornerRadius
+        self.paddingHorizontal = paddingHorizontal
+        self.paddingVertical = paddingVertical
     }
 
     // MARK: - Body
@@ -36,10 +49,10 @@ public struct BorderModifierTextField: ViewModifier {
     public func body(content: Content) -> some View {
         content
             .font(.body)
-            .padding([.top, .bottom, .trailing], 15)
-            .padding([.leading, .trailing], 10)
+            .padding([.top, .bottom, .trailing], paddingVertical)
+            .padding([.leading, .trailing], paddingHorizontal)
             .background(
-                RoundedRectangle(cornerRadius: 10)
+                RoundedRectangle(cornerRadius: cornerRadius)
                     .strokeBorder(hasError ? Color.red : (isFocused ? foregroundColor : .gray),
                                   lineWidth: hasError ? 2 : (isFocused ? 2 : 1))
             )
