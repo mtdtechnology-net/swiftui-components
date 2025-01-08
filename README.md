@@ -26,6 +26,7 @@ UIComponents is a Swift Package Manager (SwiftPM) package that provides a collec
 - [ ] `FullButtonStyle`
 - [ ] `CardModifier`
 - [ ] `ToastView`
+- [ ] `BorderModifierTextField`
 
 ### Error 
 - [ ] `Alert`
