@@ -81,4 +81,3 @@ extension PrimaryButton {
 #Preview {
     PrimaryButton(label: "Login", icon: "arrow.right", foregroundColor: .accentColor, textColor: .black, action: {})
 }
-

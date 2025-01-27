@@ -37,18 +37,16 @@ public struct PlaceholderView<Top: View, Bottom: View>: View {
 
 // MARK: - PreviewProvider
 
-struct NoDataView_Previews: PreviewProvider {
-    static var previews: some View {
-        if #available(macOS 11.0, *) {
-            PlaceholderView {
-                Image(systemName: "figure.barre")
-                    .resizable()
-                    .frame(width: 200, height: 200, alignment: .center)
-            } message: {
-                Text("You have no data for this page!")
-            }
-        } else {
-            // Fallback on earlier versions
+#Preview {
+    if #available(macOS 11.0, *) {
+        PlaceholderView {
+            Image(systemName: "figure.barre")
+                .resizable()
+                .frame(width: 200, height: 200, alignment: .center)
+        } message: {
+            Text("You have no data for this page!")
         }
+    } else {
+        // Fallback on earlier versions
     }
 }
