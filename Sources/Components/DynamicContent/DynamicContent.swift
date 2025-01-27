@@ -38,20 +38,24 @@ public struct DynamicContent<Content: View, Placeholder: View, Item>: View {
     }
 }
 
-//import SwiftUI
-
-public struct NotificationView<Content: View>: View {
-    let content: Content
-
-    public init(@ViewBuilder content: () -> Content) {
-        self.content = content()
+#Preview {
+    DynamicContent(items: ["One", "Two"]) {
+        Text("Content")
+    } placeholder: {
+        PlaceholderView {
+            Image(systemName: "figure.barre")
+        } message: {
+            Text("You have no data for this page!")
+        }
     }
-
-    public var body: some View {
-        content
-            .padding()
-            .background(Color(.tertiarySystemBackground))
-            .cornerRadius(16)
-            .transition(.move(edge: .top))
+    
+    DynamicContent(items: []) {
+        Text("Content")
+    } placeholder: {
+        PlaceholderView {
+            Image(systemName: "figure.barre")
+        } message: {
+            Text("You have no data for this page!")
+        }
     }
 }
