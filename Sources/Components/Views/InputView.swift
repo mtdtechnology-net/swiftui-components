@@ -9,33 +9,30 @@ import SwiftUI
 
 public struct InputView<Content: View>: View {
     
-    
     // MARK: - Internal
     
-    public var title: String
-    public var color: Color
-    public var systemImage: String
-    public var inputBackground: Color
-    public var inputOverlay: Color
-    
-    @ViewBuilder
-    public var content: Content
+    var title: String
+    var color: Color
+    var systemImage: String
+    var inputBackground: Color
+    var inputOverlay: Color
+    var content: () -> Content
     
     // MARK: - Init
     
-    @inlinable public init(
+    public init(
         title: String,
         color: Color,
         systemImage: String,
         inputBackground: Color,
         inputOverlay: Color,
-        @ViewBuilder content:() -> Content) {
+        @ViewBuilder content: @escaping () -> Content) {
             self.title = title
             self.color = color
             self.systemImage = systemImage
             self.inputBackground = inputBackground
             self.inputOverlay = inputOverlay
-            self.content = content()
+            self.content = content
         }
     
     // MARK: - Body
@@ -48,7 +45,7 @@ public struct InputView<Content: View>: View {
             HStack{
                 Image(systemName: systemImage)
                     .foregroundColor(color)
-                content
+                content()
             }
             .modifier(InputFieldModifier(background: inputBackground, overlay: inputOverlay))
         }

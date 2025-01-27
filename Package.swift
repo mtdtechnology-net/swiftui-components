@@ -1,4 +1,4 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 6.0
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -28,12 +28,14 @@ let package = Package(
                 .process("Resources")
             ],
             swiftSettings: [
-                .define("SPM")
+                .define("SPM"),
+                .define("BUILD_LIBRARY_FOR_DISTRIBUTION", .when(configuration: .release))
             ]
         ),
         .testTarget(
             name: "ComponentsTests",
             dependencies: ["Components"]
         ),
-    ]
+    ],
+    swiftLanguageModes: [.version("6")]
 )

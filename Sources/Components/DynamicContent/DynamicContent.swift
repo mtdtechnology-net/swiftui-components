@@ -7,60 +7,51 @@
 
 import SwiftUI
 
-public struct DynamicContent<Content: View, Placeholder: View, Item: Any>: View  {
+public struct DynamicContent<Content: View, Placeholder: View, Item>: View {
     
-    // MARK: - @State
+    // MARK: - Properties
     
-    public var items: [Item]
-    
-    // MARK: - @ViewBuilder
-    
-    @ViewBuilder public var content: Content
-    @ViewBuilder public var placeholder: Placeholder
+    var items: [Item]
+    var content: () -> Content
+    var placeholder: () -> Placeholder
     
     // MARK: - Init
     
-    @inlinable public init(items: [Item],
-                @ViewBuilder content: () -> Content,
-                @ViewBuilder placeholder: () -> Placeholder) {
+   public init(
+        items: [Item],
+        @ViewBuilder content: @escaping () -> Content,
+        @ViewBuilder placeholder: @escaping () -> Placeholder
+    ) {
         self.items = items
-        self.content = content()
-        self.placeholder = placeholder()
+        self.content = content
+        self.placeholder = placeholder
     }
     
     // MARK: - Body
     
     public var body: some View {
         if items.isEmpty {
-            placeholder
+            placeholder()
         } else {
-            content
+            content()
         }
     }
 }
 
-// MARK: - PreviewProvider
+//import SwiftUI
 
-struct ContentOrPlaceholder_Previews: PreviewProvider {
-    static var previews: some View {
-        DynamicContent(items: ["One", "Two"]) {
-            Text("Content")
-        } placeholder: {
-            PlaceholderView {
-                Image(systemName: "figure.barre")
-            } message: {
-                Text("You have no data for this page!")
-            }
-        }
-        
-        DynamicContent(items: []) {
-            Text("Content")
-        } placeholder: {
-            PlaceholderView {
-                Image(systemName: "figure.barre")
-            } message: {
-                Text("You have no data for this page!")
-            }
-        }
+public struct NotificationView<Content: View>: View {
+    let content: Content
+
+    public init(@ViewBuilder content: () -> Content) {
+        self.content = content()
+    }
+
+    public var body: some View {
+        content
+            .padding()
+            .background(Color(.tertiarySystemBackground))
+            .cornerRadius(16)
+            .transition(.move(edge: .top))
     }
 }
