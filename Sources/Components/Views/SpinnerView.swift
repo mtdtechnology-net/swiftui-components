@@ -1,5 +1,5 @@
 //
-//  Spinner.swift
+//  SpinnerView.swift
 //  Components
 //
 //  Created by Daniel Mandea on 12.02.2025.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct Spinner: View {
+public struct SpinnerView: View {
     
     // MARK: - Public Variabels
     
@@ -37,5 +37,5 @@ public struct Spinner: View {
 }
 
 #Preview {
-    Spinner()
+    SpinnerView()
 }
