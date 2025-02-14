@@ -1,13 +1,13 @@
 {
-  "originHash" : "8303a5a9ded81ee25b8b90d45036fc76ea50a41bb963544e469dbee9da339507",
+  "originHash" : "7e3c42836214d695366a18424e3dd972caddc32b9f83b1233201c456a095d3f5",
   "pins" : [
     {
       "identity" : "swiftui-loading-view",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mtdtechnology-net/swiftui-loading-view",
       "state" : {
-        "revision" : "627559f31444018d95d8690288467ffd6e77c9a7",
-        "version" : "23.10.1"
+        "revision" : "aa5ee4072d60766d388eb22a022ab173f7f7061a",
+        "version" : "25.2.1"
       }
     }
   ],
