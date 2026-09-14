@@ -42,6 +42,9 @@ public struct GenericTextField: View {
     /// The corner radius of the text field's border.
     public let cornerRadius: CGFloat
 
+    /// The fill color behind the text field's border.
+    public let backgroundColor: Color
+
     // MARK: - Initialization
 
     /// Initializes a custom-styled text field view modifier.
@@ -56,6 +59,7 @@ public struct GenericTextField: View {
     ///   - isSecure: A boolean value indicating whether the text field should be secure (e.g., password field).
     ///   - borderColor: The color of the border for the text field.
     ///   - cornerRadius: The corner radius of the text field's border. Defaults to `10`.
+    ///   - backgroundColor: The fill color behind the border. Defaults to `.clear`.
     public init(
         hasError: Binding<Bool>,
         text: Binding<String>,
@@ -66,7 +70,8 @@ public struct GenericTextField: View {
         isSecure: Bool,
         borderColor: Color,
         iconColor: Color,
-        cornerRadius: CGFloat = 10
+        cornerRadius: CGFloat = 10,
+        backgroundColor: Color = .clear
     ) {
         self._hasError = hasError
         self._text = text
@@ -78,6 +83,7 @@ public struct GenericTextField: View {
         self.borderColor = borderColor
         self.iconColor = iconColor
         self.cornerRadius = cornerRadius
+        self.backgroundColor = backgroundColor
     }
 
     // MARK: - Body
@@ -115,7 +121,8 @@ public struct GenericTextField: View {
                 isFocused: $isFocused,
                 hasError: $hasError,
                 foregroundColor: borderColor,
-                cornerRadius: cornerRadius
+                cornerRadius: cornerRadius,
+                backgroundColor: backgroundColor
             ))
 
             /// Error message
