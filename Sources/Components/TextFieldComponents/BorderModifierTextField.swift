@@ -20,6 +20,7 @@ public struct BorderModifierTextField: ViewModifier {
     public var cornerRadius: CGFloat
     public var paddingHorizontal: CGFloat
     public var paddingVertical: CGFloat
+    public var backgroundColor: Color
 
     // MARK: - Initializer
 
@@ -28,13 +29,15 @@ public struct BorderModifierTextField: ViewModifier {
     ///   - isFocused: A binding to a boolean value indicating whether the text field is currently focused.
     ///   - hasError: A binding to a boolean value indicating whether the text field has an error.
     ///   - foregroundColor: Color for the border
+    ///   - backgroundColor: Fill color behind the border. Defaults to `.clear`.
     public init(
         isFocused: FocusState<Bool>.Binding,
         hasError: Binding<Bool>,
         foregroundColor: Color,
         cornerRadius: CGFloat = 10,
         paddingHorizontal: CGFloat = 10,
-        paddingVertical: CGFloat = 15
+        paddingVertical: CGFloat = 15,
+        backgroundColor: Color = .clear
     ) {
         self._isFocused = isFocused
         self._hasError = hasError
@@ -42,6 +45,7 @@ public struct BorderModifierTextField: ViewModifier {
         self.cornerRadius = cornerRadius
         self.paddingHorizontal = paddingHorizontal
         self.paddingVertical = paddingVertical
+        self.backgroundColor = backgroundColor
     }
 
     // MARK: - Body
@@ -53,8 +57,12 @@ public struct BorderModifierTextField: ViewModifier {
             .padding([.leading, .trailing], paddingHorizontal)
             .background(
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .strokeBorder(hasError ? Color.red : (isFocused ? foregroundColor : .gray),
-                                  lineWidth: hasError ? 2 : (isFocused ? 2 : 1))
+                    .fill(backgroundColor)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: cornerRadius)
+                            .strokeBorder(hasError ? Color.red : (isFocused ? foregroundColor : .gray),
+                                          lineWidth: hasError ? 2 : (isFocused ? 2 : 1))
+                    )
             )
     }
 }
