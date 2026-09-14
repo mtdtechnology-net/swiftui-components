@@ -17,6 +17,7 @@ public struct PrimaryButton: View {
     public var isLoading: Bool
     public let height: CGFloat
     public let shadowRadius: CGFloat
+    public let cornerRadius: CGFloat
     public let action: (() -> Void)
 
     public init(label: String,
@@ -28,6 +29,7 @@ public struct PrimaryButton: View {
                 isLoading: Bool = false,
                 height: CGFloat = 44,
                 shadowRadius: CGFloat = 5,
+                cornerRadius: CGFloat = 8,
                 action: @escaping () -> Void) {
         self.label = label
         self.enabled = enabled
@@ -38,12 +40,13 @@ public struct PrimaryButton: View {
         self.isLoading = isLoading
         self.height = height
         self.shadowRadius = shadowRadius
+        self.cornerRadius = cornerRadius
         self.action = action
     }
 
     public var body: some View {
         Button(action: action, label: {
-            RoundedRectangle(cornerRadius: 8)
+            RoundedRectangle(cornerRadius: cornerRadius)
                 .foregroundStyle(foregroundColor)
                 .frame(maxWidth: .infinity)
                 .frame(height: height)
