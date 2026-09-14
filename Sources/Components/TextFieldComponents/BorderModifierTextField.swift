@@ -47,14 +47,27 @@ public struct BorderModifierTextField: ViewModifier {
     // MARK: - Body
 
     public func body(content: Content) -> some View {
-        content
-            .font(.body)
-            .padding([.top, .bottom, .trailing], paddingVertical)
-            .padding([.leading, .trailing], paddingHorizontal)
-            .background(
-                RoundedRectangle(cornerRadius: cornerRadius)
-                    .strokeBorder(hasError ? Color.red : (isFocused ? foregroundColor : .gray),
-                                  lineWidth: hasError ? 2 : (isFocused ? 2 : 1))
-            )
+        if #available(iOS 17.0, *) {
+            content
+                .font(.body)
+                .padding([.top, .bottom, .trailing], paddingVertical)
+                .padding([.leading, .trailing], paddingHorizontal)
+                .background(
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .fill(.white)
+                        .strokeBorder(hasError ? Color.red : (isFocused ? foregroundColor : .gray),
+                                      lineWidth: hasError ? 2 : (isFocused ? 2 : 1))
+                )
+        } else {
+            content
+                .font(.body)
+                .padding([.top, .bottom, .trailing], paddingVertical)
+                .padding([.leading, .trailing], paddingHorizontal)
+                .background(
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .strokeBorder(hasError ? Color.red : (isFocused ? foregroundColor : .gray),
+                                      lineWidth: hasError ? 2 : (isFocused ? 2 : 1))
+                )
+        }
     }
 }
